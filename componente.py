@@ -54,7 +54,7 @@ def visita():
         estado = Estado.OK
         if iniciador: # pra mostrar quando acaba
             tempo = time.time() - tempo_inicio
-            print(f"--------\ \n[{idx}] - Percurso concluído em {tempo:.1f}s --------\n")
+            print(f"\n--------[{idx}] - Percurso concluído em {tempo:.1f}s --------\n")
         else:
             print(f"[{idx}] sem mais vizinhos = mandando R pra {entrada}")
             envia('R', entrada)
