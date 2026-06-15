@@ -28,6 +28,7 @@ canal   = conexao.channel()
 
 # obs : subir todos antes de dar starter pra ja ter as filas
 canal.queue_declare(queue=idx, auto_delete=True)
+canal.queue_purge(queue=idx)
 
 # envia mensagem para dest
 def envia(tipo, dest):
