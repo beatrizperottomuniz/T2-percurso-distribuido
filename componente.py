@@ -66,7 +66,7 @@ def visita():
 def recebendo(tipo, origem):
     global estado, nao_visitados, entrada, iniciador
 
-    print(f"[{idx}] <-- {tipo} recebido de {origem}")
+    print(f"[{idx}] <- {tipo} recebido de {origem}")
 
     # OCIOSO recebe T pela primeira vez
     if estado == Estado.OCIOSO and tipo == 'T':
@@ -81,7 +81,7 @@ def recebendo(tipo, origem):
         if origem in nao_visitados:
             nao_visitados.remove(origem)
         time.sleep(1)
-        print(f"[{idx}] back-edge detectado com {origem}, enviando B")
+        print(f"[{idx}] back-edge detectado com {origem} = enviando B")
         envia('B', origem)
 
     # VISITADO recebe R (sub-arv concluida)
@@ -93,7 +93,7 @@ def recebendo(tipo, origem):
         visita()
     
     else:
-        print(f"[{idx}] mensagem ignorada: {tipo} de {origem} (estado atual: {estado})")
+        print(f"[{idx}] mensagem ignorada = {tipo} de {origem} (estado atual = {estado})")
 
 def espontaneamente(msg):
     global estado, nao_visitados, iniciador, tempo_inicio
