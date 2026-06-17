@@ -104,10 +104,6 @@ def espontaneamente(msg):
     visita()
 
 def callback(canal, metodo, props, corpo):
-    # Formato esperado das mensagens:
-    # "STARTER:<text>"  - evento espontâneo
-    # "<ORIGEM>:<TIPO>" - T/R/B de outro no
-
     m = corpo.decode().split(":")
     if len(m) < 2:
         print(f"[{idx}] mensagem malformada: {corpo.decode()}")
