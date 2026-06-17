@@ -49,6 +49,8 @@ def visita():
     if nao_visitados:
         prox = nao_visitados.pop(0)     #  prox vizinho a visitar
         estado = Estado.VISITADO
+        if iniciador and tempo_inicio is None:
+            tempo_inicio = time.time()
         print(f"[{idx}] enviando TOKEN para {prox} | resta = {nao_visitados}")
         envia('T', prox)
     else:
@@ -78,6 +80,7 @@ def recebendo(tipo, origem):
         # tira origem dos não_visitados - aresta = back-edge
         if origem in nao_visitados:
             nao_visitados.remove(origem)
+        time.sleep(1)
         print(f"[{idx}] back-edge detectado com {origem}, enviando B")
         envia('B', origem)
 
@@ -88,6 +91,9 @@ def recebendo(tipo, origem):
     # VISITADO recebe BACKEDGE confirmado
     elif estado == Estado.VISITADO and tipo == 'B':
         visita()
+    
+    else:
+        print(f"[{idx}] mensagem ignorada: {tipo} de {origem} (estado atual: {estado})")
 
 def espontaneamente(msg):
     global estado, nao_visitados, iniciador, tempo_inicio
@@ -95,7 +101,6 @@ def espontaneamente(msg):
     estado = Estado.INICIADOR
     nao_visitados = list(Nx)
     iniciador = True
-    tempo_inicio = time.time()
     visita()
 
 def callback(canal, metodo, props, corpo):
